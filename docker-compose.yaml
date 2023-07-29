@@ -1,0 +1,28 @@
+version: '1.1'
+services:
+  mongodb:
+    container_name: mongo
+    image: mongo
+    restart: on-failure
+    networks:
+      - todo
+  
+  backend:
+    container_name: backend
+    build: ./backend
+    restart: on-failure
+    networks:
+      - todo
+    ports:
+      - "8000:8000"
+
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    restart: on-failure
+    networks:
+      - todo
+    ports:
+      - "3000:3000"  
+networks:
+  todo : {}
